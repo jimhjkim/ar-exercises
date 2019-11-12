@@ -6,7 +6,7 @@ class Employee < ActiveRecord::Base
   validates :hourly_rate, numericality: { greater_than: 40, less_than: 200 }
   validates :store_id, presence: true
 
-  before_create :set_password
+  after_create :set_password
 
   private
 
@@ -14,7 +14,10 @@ class Employee < ActiveRecord::Base
     source = ('a'..'z').to_a + ('A'..'Z').to_a + (0..9).to_a + ['_', '-', '.']
     key = ''
     length.times { key += source[rand(source.size)].to_s }
-    self.password = key
+    
+    # self.password = key
+    self.update(password: key)
+
   end
 
 end
