@@ -7,7 +7,7 @@ class Store < ActiveRecord::Base
 
   def apparel?
     if !mens_apparel && !womens_apparel
-      errors.add(:mens_apparel, 'Restock clothes')
+      errors.add(:mens_apparel, 'cannot be false along with womens_apparel')
     end
   end
 end
